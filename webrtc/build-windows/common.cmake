@@ -1,6 +1,11 @@
-#===================
-#  common settings
-#===================
+#=======================
+#  WebRTC common settings
+#=======================
+
+# cmake 不支持 architecture，没有预定义的变量
+# 这里简单手工指定吧
+set (target_arch "x64")
+
 set (build_with_libjingle 0)
 set (webrtc_root "")
 set (webrtc_vp8_dir "")
@@ -34,7 +39,8 @@ if (MSVC)
 	# TODO(andrew): enable all warnings when possible.
 	# TODO(phoglund): get rid of 4373 supression when
 	# http://code.google.com/p/webrtc/issues/detail?id=261 is solved.
-	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} /wd4373  /wd4389")
+	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /wd4373  /wd4389")
+	set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} /wd4373  /wd4389")
 elseif (UNIX)
 	add_definitions(-DWEBRTC_LINUX)
 endif()

@@ -9,7 +9,7 @@ project(webrtc)
 include_directories(../)
 
 
-#add_subdirectory(common_audio)
+add_subdirectory(common_audio)
 #add_subdirectory(common_video)
 #add_subdirectory(modules)
 add_subdirectory(system_wrappers)
