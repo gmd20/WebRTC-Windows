@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 23
+/svn/!svn/ver/979/trunk
+END
+winarm.mk
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/890/trunk/winarm.mk
+END
+libyuv_nacl.gyp
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/969/trunk/libyuv_nacl.gyp
+END
+linux.mk
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/977/trunk/linux.mk
+END
+all.gyp
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/873/trunk/all.gyp
+END
+libyuv_test.gyp
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/727/trunk/libyuv_test.gyp
+END
+libyuv.gyp
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/979/trunk/libyuv.gyp
+END
+OWNERS
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/!svn/ver/730/trunk/OWNERS
+END
+PATENTS
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/!svn/ver/41/trunk/PATENTS
+END
+README.chromium
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/979/trunk/README.chromium
+END
+libyuv.gypi
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/969/trunk/libyuv.gypi
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/314/trunk/LICENSE
+END
+public.mk
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/365/trunk/public.mk
+END
+AUTHORS
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/!svn/ver/53/trunk/AUTHORS
+END
+Android.mk
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/886/trunk/Android.mk
+END
+DEPS
+K 25
+svn:wc:ra_dav:version-url
+V 28
+/svn/!svn/ver/912/trunk/DEPS
+END
+codereview.settings
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/688/trunk/codereview.settings
+END
+LICENSE_THIRD_PARTY
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/678/trunk/LICENSE_THIRD_PARTY
+END

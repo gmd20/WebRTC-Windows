@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 28
+/svn/!svn/ver/817/trunk/util
+END
+psnr.h
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/780/trunk/util/psnr.h
+END
+compare.cc
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/614/trunk/util/compare.cc
+END
+psnr_main.cc
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/700/trunk/util/psnr_main.cc
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/689/trunk/util/Makefile
+END
+ssim.cc
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/780/trunk/util/ssim.cc
+END
+ssim.h
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/780/trunk/util/ssim.h
+END
+convert.cc
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/726/trunk/util/convert.cc
+END
+cpuid.c
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/817/trunk/util/cpuid.c
+END
+psnr.cc
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/719/trunk/util/psnr.cc
+END
