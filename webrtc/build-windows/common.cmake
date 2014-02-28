@@ -28,7 +28,7 @@ set (enable_protobuf  1)
 set (build_libjpeg  1)
 set (build_libyuv 1)
 set (build_libvpx  1)
-set (libyuv_dir "/third_party/libyuv")
+set (libyuv_dir "../..//third_party/libyuv")
 
 if (${enable_video})
 	add_definitions(-DWEBRTC_MODULE_UTILITY_VIDEO)
