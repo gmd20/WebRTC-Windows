@@ -70,7 +70,6 @@ add_library(common_audio STATIC ${common_audio_source})
 add_dependencies(common_audio system_wrappers)
 
 if (${target_arch} STREQUAL "x64"  OR  ${target_arch} STREQUAL "ia32")
-	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /DWEBRTC_ARCH_X86_FAMILY=1")
 	add_library(common_audio_sse2 STATIC "resampler/sinc_resampler_sse.cc")
 	add_dependencies(common_audio common_audio_sse2)
 	if(MSVC)
