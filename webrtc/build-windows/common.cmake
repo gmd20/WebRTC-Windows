@@ -34,6 +34,10 @@ if (${enable_video})
 	add_definitions(-DWEBRTC_MODULE_UTILITY_VIDEO)
 endif()
 
+# 是否包含单元测试程序项目
+set (include_tests 1)
+
+
 if (MSVC)
 	add_definitions(-DWEBRTC_WIN)
 	# TODO(andrew): enable all warnings when possible.
