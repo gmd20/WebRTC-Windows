@@ -1,5 +1,16 @@
 cmake_minimum_required(VERSION 2.8)
 
+include_directories("${webrtc_root}/../third_party"
+					"${webrtc_root}/../third_party/testing"
+					"${webrtc_root}/../third_party/testing/gmock/include"
+					"${webrtc_root}/../third_party/testing/gtest/include")
+if (MSVC)
+	include_directories("${webrtc_root}/../third_party/gflags/src/windows")
+else()
+	include_directories("${webrtc_root}/../third_party/gflags/src")
+endif()
+
+
 set (channel_transport_source
 	"channel_transport/channel_transport.cc"
 	"channel_transport/include/channel_transport.h"
@@ -24,6 +35,10 @@ extract_platform_specific_source(channel_transport_source)
 add_library(channel_transport STATIC ${channel_transport_source})
 target_link_libraries(channel_transport gtest)
 target_link_libraries(channel_transport system_wrappers)
+if (MSVC)
+	target_link_libraries(channel_transport Ws2_32.lib)
+	set_target_properties(channel_transport PROPERTIES  COMPILE_DEFINITIONS "_WINSOCKAPI_")
+endif()
 
 
 add_library(frame_generator STATIC
@@ -35,8 +50,8 @@ target_link_libraries(frame_generator common_video)
 set (test_support_source
 	"test_suite.cc"
 	"test_suite.h"
-	"testsupport/android/root_path_android.cc"
-	"testsupport/android/root_path_android_chromium.cc"
+	# "testsupport/android/root_path_android.cc"
+	# "testsupport/android/root_path_android_chromium.cc"
 	"testsupport/fileutils.cc"
 	"testsupport/fileutils.h"
 	"testsupport/frame_reader.cc"

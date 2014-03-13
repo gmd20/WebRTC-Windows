@@ -15,9 +15,9 @@ add_subdirectory(common_video)
 
 if (${include_tests})
 	add_subdirectory("${webrtc_root}/../third_party/gflags" gflags)
-	# gmock include add_subdirectory(gtest) 
-	# add_subdirectory("${webrtc_root}/../third_party/gtest" gtest)
-	add_subdirectory("${webrtc_root}/../third_party/gmock" gmock)
+	# gmock include add_subdirectory(gtest)
+	# add_subdirectory("${webrtc_root}/../third_party/testing/gtest" gtest)
+	add_subdirectory("${webrtc_root}/../third_party/testing/gmock" gmock)
 	add_subdirectory(test)
 endif()
 

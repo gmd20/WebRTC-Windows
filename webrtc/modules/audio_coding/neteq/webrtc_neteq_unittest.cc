@@ -21,6 +21,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "gtest/gtest.h"
 #include "webrtc/modules/audio_coding/neteq/interface/webrtc_neteq_help_macros.h"

@@ -66,17 +66,67 @@ target_link_libraries(NetEq CNG)
 target_link_libraries(NetEq common_audio)
 
 if (${include_tests})
+	set (NetEqTestTools_source
+		"test/NETEQTEST_CodecClass.cc"
+		"test/NETEQTEST_CodecClass.h"
+		"test/NETEQTEST_DummyRTPpacket.cc"
+		"test/NETEQTEST_DummyRTPpacket.h"
+		"test/NETEQTEST_NetEQClass.cc"
+		"test/NETEQTEST_NetEQClass.h"
+		"test/NETEQTEST_RTPpacket.cc"
+		"test/NETEQTEST_RTPpacket.h")
+	add_library(NetEqTestTools STATIC ${NetEqTestTools_source})
+	target_link_libraries(NetEqTestTools gflags)
+	target_link_libraries(NetEqTestTools G711)
+	target_link_libraries(NetEqTestTools G722)
+	target_link_libraries(NetEqTestTools PCM16B)
+	target_link_libraries(NetEqTestTools iLBC)
+	target_link_libraries(NetEqTestTools iSAC)
+	target_link_libraries(NetEqTestTools CNG)
+	# '<(DEPTH)/testing/gtest.gyp:gtest',
+	set_target_properties(NetEqTestTools PROPERTIES  COMPILE_DEFINITIONS "CODEC_ILBC;CODEC_PCM16B;CODEC_G711;CODEC_G722;CODEC_ISAC;CODEC_PCM16B_WB;CODEC_ISAC_SWB;CODEC_ISAC_FB;CODEC_PCM16B_32KHZ;CODEC_CNGCODEC8;CODEC_CNGCODEC16;CODEC_CNGCODEC32;CODEC_ATEVENT_DECODE;CODEC_RED;")
+	#set_target_properties(NetEqTestTools PROPERTIES  INCLUDE_DIRECTORIES "interface test")
+	target_include_directories(NetEqTestTools
+		PRIVATE "interface"
+		PRIVATE "test"
+		PRIVATE "../codecs/isac/main/interface"
+		PRIVATE "${webrtc_root}/../third_party/testing/gtest/include"
+		PRIVATE "${webrtc_root}/../third_party/testing/gmock/include"
+		PRIVATE  "../codecs/ilbc/interface"
+		PRIVATE  "../codecs/pcm16b/include"
+		PRIVATE "../codecs/g722/include"
+		PRIVATE "../codecs/g711/include")
+	if(MSVC)
+		set_target_properties(NetEqTestTools PROPERTIES  COMPILE_DEFINITIONS "NOMINMAX")
+		set_target_properties(NetEqTestTools PROPERTIES  COMPILE_FLAGS "/wd4267")
+		target_include_directories(NetEqTestTools PRIVATE "${webrtc_root}/../third_party/gflags/src/windows")
+	else()
+		target_include_directories(NetEqTestTools PRIVATE "${webrtc_root}/../third_party/gflags/src")
+	endif()
+
+
+
 	add_executable(neteq_unittests "webrtc_neteq_unittest.cc")
 	target_link_libraries(neteq_unittests NetEq)
-	target_link_libraries(neteq_unittests NetEqTestTools)
 	target_link_libraries(neteq_unittests neteq_unittest_tools)
 	target_link_libraries(neteq_unittests gtest)
+	target_link_libraries(neteq_unittests NetEqTestTools)
 	add_dependencies(neteq_unittests test_support_main)
+	target_include_directories(neteq_unittests
+		PRIVATE "${webrtc_root}/../third_party/testing/gtest/include"
+		PRIVATE "${webrtc_root}/../third_party/testing/gmock/include")
+	if (MSVC)
+		set_target_properties(neteq_unittests PROPERTIES  COMPILE_DEFINITIONS "NOMINMAX")
+		target_include_directories(neteq_unittests PRIVATE "${webrtc_root}/../third_party/gflags/src/windows")
+	else()
+		target_include_directories(neteq_unittests PRIVATE "${webrtc_root}/../third_party/gflags/src")
+	endif()
+
 
 
 	add_executable(NetEqRTPplay "test/NetEqRTPplay.cc")
-	target_link_libraries(NetEqRTPplay NetEq)
 	target_link_libraries(NetEqRTPplay NetEqTestTools)
+	target_link_libraries(NetEqRTPplay NetEq)
 	target_link_libraries(NetEqRTPplay G711)
 	target_link_libraries(NetEqRTPplay G722)
 	target_link_libraries(NetEqRTPplay PCM16B)
@@ -85,7 +135,12 @@ if (${include_tests})
 	target_link_libraries(NetEqRTPplay CNG)
 	set_target_properties(NetEqRTPplay PROPERTIES  COMPILE_DEFINITIONS "CODEC_ILBC;CODEC_PCM16B;CODEC_G711;CODEC_G722;CODEC_ISAC;CODEC_PCM16B_WB;CODEC_ISAC_SWB;CODEC_ISAC_FB;CODEC_PCM16B_32KHZ;CODEC_CNGCODEC8;CODEC_CNGCODEC16;CODEC_CNGCODEC32;CODEC_ATEVENT_DECODE;CODEC_RED")
 	#set_target_properties(NetEqRTPplay PROPERTIES  INCLUDE_DIRECTORIES "./ test")
-	target_include_directories(NetEqRTPplay  PRIVATE  "./" PRIVATE  "test")
+	target_include_directories(NetEqRTPplay
+		PRIVATE  "./"
+		PRIVATE "test"
+		PRIVATE  "../codecs/isac/main/interface"
+		PRIVATE  "../codecs/pcm16b/include"
+		PRIVATE  "../codecs/g711/include")
 	if (MSVC)
 		set_target_properties(NetEqRTPplay PROPERTIES  COMPILE_FLAGS "/wd4267") 
 	endif()
@@ -99,29 +154,12 @@ if (${include_tests})
 	target_link_libraries(neteq_unittests gflags)
 	target_link_libraries(neteq_unittests gtest)
 	add_dependencies(neteq3_speed_test test_support_main)
-
-
-	set (NetEqTestTools_source
-		"test/NETEQTEST_CodecClass.cc"
-		"test/NETEQTEST_CodecClass.h"
-		"test/NETEQTEST_DummyRTPpacket.cc"
-		"test/NETEQTEST_DummyRTPpacket.h"
-		"test/NETEQTEST_NetEQClass.cc"
-		"test/NETEQTEST_NetEQClass.h"
-		"test/NETEQTEST_RTPpacket.cc"
-		"test/NETEQTEST_RTPpacket.h")
-	add_executable(NetEqTestTools ${NetEqTestTools_source})
-	target_link_libraries(NetEqTestTools G711)
-	target_link_libraries(NetEqTestTools G722)
-	target_link_libraries(NetEqTestTools PCM16B)
-	target_link_libraries(NetEqTestTools iLBC)
-	target_link_libraries(NetEqTestTools iSAC)
-	target_link_libraries(NetEqTestTools CNG)
-	# '<(DEPTH)/testing/gtest.gyp:gtest',
-	set_target_properties(NetEqTestTools PROPERTIES  COMPILE_DEFINITIONS "CODEC_ILBC;CODEC_PCM16B;CODEC_G711;CODEC_G722;CODEC_ISAC;CODEC_PCM16B_WB;CODEC_ISAC_SWB;CODEC_ISAC_FB;CODEC_PCM16B_32KHZ;CODEC_CNGCODEC8;CODEC_CNGCODEC16;CODEC_CNGCODEC32;CODEC_ATEVENT_DECODE;CODEC_RED")
-	#set_target_properties(NetEqTestTools PROPERTIES  INCLUDE_DIRECTORIES "interface test")
-	target_include_directories(NetEqTestTools  PRIVATE  "interface" PRIVATE  "test")
+	target_include_directories(neteq3_speed_test
+		PRIVATE "${webrtc_root}/../third_party/testing/gtest/include"
+		PRIVATE "${webrtc_root}/../third_party/testing/gmock/include")
 	if (MSVC)
-		set_target_properties(NetEqTestTools PROPERTIES  COMPILE_FLAGS "/wd4267")
+		target_include_directories(neteq3_speed_test PRIVATE "${webrtc_root}/../third_party/gflags/src/windows")
+	else()
+		target_include_directories(neteq3_speed_test PRIVATE "${webrtc_root}/../third_party/gflags/src")
 	endif()
 endif()
