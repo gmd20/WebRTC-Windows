@@ -5,7 +5,7 @@ if (MSVC)
 		"src/gflags.cc"
         "src/gflags_completions.cc"
         "src/gflags_reporting.cc"
-        "src/windows/port.c")
+        "src/windows/port.cc")
 else (UNIX)
 	include_directories("src/")
 	include_directories("src/gflags")
