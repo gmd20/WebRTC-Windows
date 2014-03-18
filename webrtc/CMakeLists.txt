@@ -8,6 +8,10 @@ set (webrtc_root ${CMAKE_SOURCE_DIR})
 message (STATUS "webrtc_root = ${webrtc_root}")
 include_directories("${webrtc_root}/..")
 
+# 所有的lib和exe统一使用static linking
+if (MSVC)
+	add_compile_options("/MT")
+endif()
 
 add_subdirectory(system_wrappers)
 add_subdirectory(common_audio)

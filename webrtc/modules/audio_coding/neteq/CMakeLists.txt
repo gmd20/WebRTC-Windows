@@ -83,9 +83,22 @@ if (${include_tests})
 	target_link_libraries(NetEqTestTools iLBC)
 	target_link_libraries(NetEqTestTools iSAC)
 	target_link_libraries(NetEqTestTools CNG)
-	# '<(DEPTH)/testing/gtest.gyp:gtest',
-	set_target_properties(NetEqTestTools PROPERTIES  COMPILE_DEFINITIONS "CODEC_ILBC;CODEC_PCM16B;CODEC_G711;CODEC_G722;CODEC_ISAC;CODEC_PCM16B_WB;CODEC_ISAC_SWB;CODEC_ISAC_FB;CODEC_PCM16B_32KHZ;CODEC_CNGCODEC8;CODEC_CNGCODEC16;CODEC_CNGCODEC32;CODEC_ATEVENT_DECODE;CODEC_RED;")
-	#set_target_properties(NetEqTestTools PROPERTIES  INCLUDE_DIRECTORIES "interface test")
+	target_link_libraries(NetEqTestTools Ws2_32.lib)
+	target_compile_definitions(NetEqTestTools
+		PRIVATE "CODEC_ILBC"
+		PRIVATE "CODEC_PCM16B"
+		PRIVATE "CODEC_G711"
+		PRIVATE "CODEC_G722"
+		PRIVATE "CODEC_ISAC"
+		PRIVATE "CODEC_PCM16B_WB"
+		PRIVATE "CODEC_ISAC_SWB"
+		PRIVATE "CODEC_ISAC_FB"
+		PRIVATE "CODEC_PCM16B_32KHZ"
+		PRIVATE "CODEC_CNGCODEC8"
+		PRIVATE "CODEC_CNGCODEC16"
+		PRIVATE "CODEC_CNGCODEC32"
+		PRIVATE "CODEC_ATEVENT_DECODE"
+		PRIVATE "CODEC_RED")
 	target_include_directories(NetEqTestTools
 		PRIVATE "interface"
 		PRIVATE "test"
@@ -97,32 +110,47 @@ if (${include_tests})
 		PRIVATE "../codecs/g722/include"
 		PRIVATE "../codecs/g711/include")
 	if(MSVC)
-		set_target_properties(NetEqTestTools PROPERTIES  COMPILE_DEFINITIONS "NOMINMAX")
-		set_target_properties(NetEqTestTools PROPERTIES  COMPILE_FLAGS "/wd4267")
+		target_compile_options(NetEqTestTools PRIVATE "/wd4267")
+		target_compile_definitions(NetEqTestTools PRIVATE "NOMINMAX")
 		target_include_directories(NetEqTestTools PRIVATE "${webrtc_root}/../third_party/gflags/src/windows")
 	else()
 		target_include_directories(NetEqTestTools PRIVATE "${webrtc_root}/../third_party/gflags/src")
 	endif()
-
-
+	# These macros exist so flags and symbols are properly
+	# exported when building DLLs. Since we don't build DLLs, we
+	# need to disable them.
+	target_compile_definitions(NetEqTestTools
+		PRIVATE "GFLAGS_DLL_DECL="
+		PRIVATE "GFLAGS_DLL_DECLARE_FLAG="
+		PRIVATE "GFLAGS_DLL_DEFINE_FLAG=")
 
 	add_executable(neteq_unittests "webrtc_neteq_unittest.cc")
 	target_link_libraries(neteq_unittests NetEq)
 	target_link_libraries(neteq_unittests neteq_unittest_tools)
 	target_link_libraries(neteq_unittests gtest)
+	target_link_libraries(neteq_unittests gflags)
 	target_link_libraries(neteq_unittests NetEqTestTools)
-	add_dependencies(neteq_unittests test_support_main)
+	target_link_libraries(neteq_unittests test_support_main)
+	target_link_libraries(neteq_unittests PCM16B)
+	target_link_libraries(neteq_unittests iLBC)
+	target_link_libraries(neteq_unittests iSAC)
+	target_link_libraries(neteq_unittests CNG)
 	target_include_directories(neteq_unittests
 		PRIVATE "${webrtc_root}/../third_party/testing/gtest/include"
 		PRIVATE "${webrtc_root}/../third_party/testing/gmock/include")
 	if (MSVC)
-		set_target_properties(neteq_unittests PROPERTIES  COMPILE_DEFINITIONS "NOMINMAX")
+		target_compile_definitions(neteq_unittests PRIVATE "NOMINMAX")
 		target_include_directories(neteq_unittests PRIVATE "${webrtc_root}/../third_party/gflags/src/windows")
 	else()
 		target_include_directories(neteq_unittests PRIVATE "${webrtc_root}/../third_party/gflags/src")
 	endif()
-
-
+	# These macros exist so flags and symbols are properly
+	# exported when building DLLs. Since we don't build DLLs, we
+	# need to disable them.
+	target_compile_definitions(neteq_unittests
+		PRIVATE "GFLAGS_DLL_DECL="
+		PRIVATE "GFLAGS_DLL_DECLARE_FLAG="
+		PRIVATE "GFLAGS_DLL_DEFINE_FLAG=")
 
 	add_executable(NetEqRTPplay "test/NetEqRTPplay.cc")
 	target_link_libraries(NetEqRTPplay NetEqTestTools)
@@ -133,27 +161,39 @@ if (${include_tests})
 	target_link_libraries(NetEqRTPplay iLBC)
 	target_link_libraries(NetEqRTPplay iSAC)
 	target_link_libraries(NetEqRTPplay CNG)
-	set_target_properties(NetEqRTPplay PROPERTIES  COMPILE_DEFINITIONS "CODEC_ILBC;CODEC_PCM16B;CODEC_G711;CODEC_G722;CODEC_ISAC;CODEC_PCM16B_WB;CODEC_ISAC_SWB;CODEC_ISAC_FB;CODEC_PCM16B_32KHZ;CODEC_CNGCODEC8;CODEC_CNGCODEC16;CODEC_CNGCODEC32;CODEC_ATEVENT_DECODE;CODEC_RED")
-	#set_target_properties(NetEqRTPplay PROPERTIES  INCLUDE_DIRECTORIES "./ test")
+	target_compile_definitions(NetEqRTPplay
+		PRIVATE "CODEC_ILBC"
+		PRIVATE "CODEC_PCM16B"
+		PRIVATE "CODEC_G711"
+		PRIVATE "CODEC_G722"
+		PRIVATE "CODEC_ISAC"
+		PRIVATE "CODEC_PCM16B_WB"
+		PRIVATE "CODEC_ISAC_SWB"
+		PRIVATE "CODEC_ISAC_FB"
+		PRIVATE "CODEC_PCM16B_32KHZ"
+		PRIVATE "CODEC_CNGCODEC8"
+		PRIVATE "CODEC_CNGCODEC16"
+		PRIVATE "CODEC_CNGCODEC32"
+		PRIVATE "CODEC_ATEVENT_DECODE"
+		PRIVATE "CODEC_RED")
 	target_include_directories(NetEqRTPplay
-		PRIVATE  "./"
+		PRIVATE "./"
 		PRIVATE "test"
-		PRIVATE  "../codecs/isac/main/interface"
-		PRIVATE  "../codecs/pcm16b/include"
-		PRIVATE  "../codecs/g711/include")
+		PRIVATE "../codecs/isac/main/interface"
+		PRIVATE "../codecs/pcm16b/include"
+		PRIVATE "../codecs/g711/include")
 	if (MSVC)
-		set_target_properties(NetEqRTPplay PROPERTIES  COMPILE_FLAGS "/wd4267") 
+		target_compile_options(NetEqRTPplay PRIVATE "/wd4267")
 	endif()
 
 
-
 	add_executable(neteq3_speed_test "test/neteq_speed_test.cc")
-	target_link_libraries(neteq_unittests NetEq)
-	target_link_libraries(neteq_unittests PCM16B)
-	target_link_libraries(neteq_unittests neteq_unittest_tools)
-	target_link_libraries(neteq_unittests gflags)
-	target_link_libraries(neteq_unittests gtest)
-	add_dependencies(neteq3_speed_test test_support_main)
+	target_link_libraries(neteq3_speed_test NetEq)
+	target_link_libraries(neteq3_speed_test PCM16B)
+	target_link_libraries(neteq3_speed_test neteq_unittest_tools)
+	target_link_libraries(neteq3_speed_test gflags)
+	target_link_libraries(neteq3_speed_test gtest)
+	target_link_libraries(neteq3_speed_test test_support_main)
 	target_include_directories(neteq3_speed_test
 		PRIVATE "${webrtc_root}/../third_party/testing/gtest/include"
 		PRIVATE "${webrtc_root}/../third_party/testing/gmock/include")
@@ -162,4 +202,11 @@ if (${include_tests})
 	else()
 		target_include_directories(neteq3_speed_test PRIVATE "${webrtc_root}/../third_party/gflags/src")
 	endif()
+	# These macros exist so flags and symbols are properly
+	# exported when building DLLs. Since we don't build DLLs, we
+	# need to disable them.
+	target_compile_definitions(neteq3_speed_test
+		PRIVATE "GFLAGS_DLL_DECL="
+		PRIVATE "GFLAGS_DLL_DECLARE_FLAG="
+		PRIVATE "GFLAGS_DLL_DEFINE_FLAG=")
 endif()

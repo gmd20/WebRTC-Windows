@@ -73,6 +73,13 @@ target_link_libraries(test_support gtest)
 target_link_libraries(test_support gmock)
 target_link_libraries(test_support gflags)
 target_link_libraries(test_support system_wrappers)
+# These macros exist so flags and symbols are properly
+# exported when building DLLs. Since we don't build DLLs, we
+# need to disable them.
+target_compile_definitions(test_support
+	PRIVATE "GFLAGS_DLL_DECL="
+	PRIVATE "GFLAGS_DLL_DECLARE_FLAG="
+	PRIVATE "GFLAGS_DLL_DEFINE_FLAG=")
 
 
 add_library(test_support_main STATIC "run_all_unittests.cc")
