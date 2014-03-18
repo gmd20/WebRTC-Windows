@@ -10,6 +10,9 @@ set (opus_source
         "src/opus_decoder.c"
         "src/opus_encoder.c"
         "src/repacketizer.c"
+        "src/analysis.c"
+        "src/mlp.c"
+        "src/mlp_data.c"
 
         # celt sub-codec
         "celt/bands.c"
@@ -28,6 +31,8 @@ set (opus_source
         "celt/quant_bands.c"
         "celt/rate.c"
         "celt/vq.c"
+		"celt/celt_encoder.c"
+		"celt/celt_decoder.c"
 
         # silk sub-codec
         "silk/A2NLSF.c"
