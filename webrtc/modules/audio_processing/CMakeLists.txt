@@ -71,7 +71,13 @@ else()
 		"ns/ns_core.h"
 		"ns/windows_private.h")
 endif()
-
+if (${target_arch} STREQUAL "mipsel")
+	list(APPEND audio_processing_source
+		"aecm/aecm_core_mips.c")
+else()
+	list(APPEND audio_processing_source
+		"aecm/aecm_core_c.c")
+endif()
 add_library(audio_processing STATIC ${audio_processing_source})
 target_link_libraries(audio_processing common_audio)
 target_link_libraries(audio_processing system_wrappers)

@@ -102,9 +102,11 @@
 /x86-generic_out/
 /xcodebuild
 !*.sha1
+!*.vcproj
+!*.vcxproj
+!*.vcxproj.filters
+!*.sln
+*.pb.h
 !/third_party/libyuv
 /third_party/protobuf-2.5.0/vsprojects/Release
-!/third_party/protobuf-2.5.0/vsprojects/*.vcproj
-!/third_party/protobuf-2.5.0/vsprojects/*.vcxproj
-!/third_party/protobuf-2.5.0/vsprojects/*.vcxproj.filters
-!/third_party/protobuf-2.5.0/vsprojects/*.sln
+/third_party/protobuf-2.5.0/gtest/msvc/protobuf

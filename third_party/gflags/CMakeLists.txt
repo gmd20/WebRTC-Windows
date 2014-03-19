@@ -21,9 +21,9 @@ add_library(gflags STATIC ${gflags_source})
 # exported when building DLLs. Since we don't build DLLs, we
 # need to disable them.
 target_compile_definitions(gflags
-	PRIVATE "GFLAGS_DLL_DECL="
-	PRIVATE "GFLAGS_DLL_DECLARE_FLAG="
-	PRIVATE "GFLAGS_DLL_DEFINE_FLAG=")
+	PUBLIC "GFLAGS_DLL_DECL="
+	PUBLIC "GFLAGS_DLL_DECLARE_FLAG="
+	PUBLIC "GFLAGS_DLL_DEFINE_FLAG=")
 if (MSVC)
 	target_compile_options(gflags PRIVATE "/wd4005" PRIVATE "/wd4267")
 endif()

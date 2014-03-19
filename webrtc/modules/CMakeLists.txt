@@ -28,4 +28,12 @@ add_subdirectory("utility/source")
 
 if (${include_tests})
 	# add_subdirectory("rtp_rtcp/test/testFec/")
+		# 'audio_coding/codecs/isac/isac_test.gypi',
+        # 'audio_coding/codecs/isac/isacfix_test.gypi',
+		add_subdirectory("audio_processing/test")
+        # 'rtp_rtcp/test/testFec/test_fec.gypi',
+        # 'video_coding/main/source/video_coding_test.gypi',
+        # 'video_coding/codecs/test/video_codecs_test_framework.gypi',
+        # 'video_coding/codecs/test_framework/test_framework.gypi',
+        # 'video_coding/codecs/tools/video_codecs_tools.gypi'
 endif ()
