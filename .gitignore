@@ -68,7 +68,7 @@
 /third_party/libjpeg_turbo
 /third_party/libsrtp
 /third_party/libvpx
-!/third_party/libyuv
+/third_party/libyuv
 /third_party/llvm
 /third_party/llvm-build
 /third_party/nss
@@ -102,4 +102,9 @@
 /x86-generic_out/
 /xcodebuild
 !*.sha1
-
+!/third_party/libyuv
+!/third_party/protobuf-2.5.0/vsprojects/Release
+!/third_party/protobuf-2.5.0/vsprojects/*.vcproj
+!/third_party/protobuf-2.5.0/vsprojects/*.vcxproj
+!/third_party/protobuf-2.5.0/vsprojects/*.vcxproj.filters
+!/third_party/protobuf-2.5.0/vsprojects/*.sln
