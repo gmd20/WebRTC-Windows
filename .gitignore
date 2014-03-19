@@ -103,7 +103,7 @@
 /xcodebuild
 !*.sha1
 !/third_party/libyuv
-!/third_party/protobuf-2.5.0/vsprojects/Release
+/third_party/protobuf-2.5.0/vsprojects/Release
 !/third_party/protobuf-2.5.0/vsprojects/*.vcproj
 !/third_party/protobuf-2.5.0/vsprojects/*.vcxproj
 !/third_party/protobuf-2.5.0/vsprojects/*.vcxproj.filters
