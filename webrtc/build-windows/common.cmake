@@ -14,7 +14,8 @@ set (webrtc_vp8_dir "")
 # This should normally be enabled; the intended use is to disable only
 # when building voice engine exclusively.
 set (enable_video 1)
-    # Selects fixed-point code where possible.
+
+# Selects fixed-point code where possible.
 set (prefer_fixed_point  0)
 
 # Enable data logging. Produces text files with data logged within engines
@@ -30,27 +31,10 @@ set (build_libyuv 1)
 set (build_libvpx  1)
 set (libyuv_dir "../..//third_party/libyuv")
 
-if (${enable_video})
-	add_definitions(-DWEBRTC_MODULE_UTILITY_VIDEO)
-endif()
 
 # 是否包含单元测试程序项目
 set (include_tests 1)
 set (include_opus 1)
-
-if (MSVC)
-	add_definitions(-DWEBRTC_WIN)
-	# TODO(andrew): enable all warnings when possible.
-	# TODO(phoglund): get rid of 4373 supression when
-	# http://code.google.com/p/webrtc/issues/detail?id=261 is solved.
-	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /wd4373  /wd4389")
-	set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} /wd4373  /wd4389")
-elseif (UNIX)
-	add_definitions(-DWEBRTC_LINUX)
-endif()
-
-
-
 
 
 
@@ -96,9 +80,9 @@ endfunction()
 
 
 
-################################################
-# functions to extract platform specific source 
-################################################
+#################################################
+# functions to extract platform specific source #
+#################################################
 
 function (extract_windows_source source_list out_arg)
 	set (new_source_list)
@@ -121,6 +105,7 @@ function (extract_linux_source source_list out_arg)
 	set(${out_arg} ${new_source_list} PARENT_SCOPE)
 endfunction()
 
+# 把不是该平台的源文件从 source_list 列表里面删除
 function (extract_platform_specific_source source_list)
 	if (MSVC)
 		extract_windows_source(${source_list} new_source_list)

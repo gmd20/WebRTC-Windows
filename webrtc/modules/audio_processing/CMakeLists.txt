@@ -82,7 +82,15 @@ if (${aec_untrusted_delay_for_testing})
 	target_compile_definitions(audio_processing PRIVATE "WEBRTC_UNTRUSTED_DELAY")
 endif()
 if (${enable_protobuf})
-	protobuf_target(audioproc_debug_proto "debug.proto")
+	PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS "debug.proto")
+	add_library(audioproc_debug_proto STATIC ${PROTO_SRCS} ${PROTO_HDRS})
+	# PROTOBUF_GENERATE_CPP默认生成的文件放在build目录下，
+	# 复制出来便于其他项目文件引用
+	add_custom_command(TARGET audioproc_debug_proto POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy ${PROTO_HDRS} "${CMAKE_CURRENT_SOURCE_DIR}/debug.pb.h")
+	target_link_libraries(audioproc_debug_proto ${PROTOBUF_LIBRARIES})
+	target_include_directories(audioproc_debug_proto
+		PUBLIC "${PROTOBUF_INCLUDE_DIRS}")
 	target_link_libraries(audio_processing audioproc_debug_proto)
 	target_compile_definitions(audio_processing PRIVATE "WEBRTC_AUDIOPROC_DEBUG_DUMP")
 endif()

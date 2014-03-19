@@ -1,6 +1,6 @@
 include_directories("resampler/include"
-                	"signal_processing/include"
-                	"vad/include")
+					"signal_processing/include"
+					"vad/include")
 
 
 set (common_audio_source
@@ -67,23 +67,23 @@ set (common_audio_source
 
 
 add_library(common_audio STATIC ${common_audio_source})
-add_dependencies(common_audio system_wrappers)
+target_link_libraries(common_audio system_wrappers)
 
 if (${target_arch} STREQUAL "x64"  OR  ${target_arch} STREQUAL "ia32")
 	add_library(common_audio_sse2 STATIC "resampler/sinc_resampler_sse.cc")
-	add_dependencies(common_audio common_audio_sse2)
+	target_link_libraries(common_audio common_audio_sse2)
 	if(MSVC)
 		message (STATUS "enable common_audio_sse2 in Visual Studio!")
-		set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /arch:SSE2")
+		target_compile_options(common_audio_sse2 PRIVATE "/arch:SSE2")
+		target_compile_options(common_audio_sse2 PRIVATE "/wd4334" PRIVATE "/wd4334")
 	elseif(${CMAKE_COMPILER_IS_GNUCXX})
 		message (STATUS "enable common_audio_sse2 in gcc!")
-		set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -msse2")
-	endif()	
+		target_compile_options(common_audio_sse2 PRIVATE "-msse2")
+	endif()
 endif()
 
 if(MSVC)
-	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /wd4334")
-	set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} /wd4334")
+	target_compile_options(common_audio PRIVATE "/wd4334" PRIVATE "/wd4334")
 endif()
 
 

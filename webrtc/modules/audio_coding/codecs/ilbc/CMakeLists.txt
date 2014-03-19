@@ -1,6 +1,6 @@
 include_directories("interface"
-                	"${webrtc_root}"
-					"${webrtc_root}/common_audio/signal_processing/include")
+					"${webrtc_root}/webrtc"
+					"${webrtc_root}/webrtc/common_audio/signal_processing/include")
 
 set (iLBC_source
         "interface/ilbc.h"

@@ -1,6 +1,6 @@
 include_directories("../modules/interface/"
-                	"interface"
-                	"libyuv/include")
+					"interface"
+					"libyuv/include")
 
 
 set (common_video_source

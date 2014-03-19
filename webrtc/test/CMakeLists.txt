@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 2.8)
 
-include_directories("${webrtc_root}/../third_party"
-					"${webrtc_root}/../third_party/testing"
-					"${webrtc_root}/../third_party/testing/gmock/include"
-					"${webrtc_root}/../third_party/testing/gtest/include")
+include_directories("${webrtc_root}/third_party"
+					"${webrtc_root}/third_party/testing"
+					"${webrtc_root}/third_party/testing/gmock/include"
+					"${webrtc_root}/third_party/testing/gtest/include")
 if (MSVC)
-	include_directories("${webrtc_root}/../third_party/gflags/src/windows")
+	include_directories("${webrtc_root}/third_party/gflags/src/windows")
 else()
-	include_directories("${webrtc_root}/../third_party/gflags/src")
+	include_directories("${webrtc_root}/third_party/gflags/src")
 endif()
 
 

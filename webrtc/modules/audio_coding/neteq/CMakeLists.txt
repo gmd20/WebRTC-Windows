@@ -1,6 +1,6 @@
 include_directories("interface"
-					"${webrtc_root}"
-					"${webrtc_root}/common_audio/signal_processing/include"
+					"${webrtc_root}/webrtc"
+					"${webrtc_root}/webrtc/common_audio/signal_processing/include"
 					"../codecs/cng/include")
 
 
@@ -103,8 +103,8 @@ if (${include_tests})
 		PRIVATE "interface"
 		PRIVATE "test"
 		PRIVATE "../codecs/isac/main/interface"
-		PRIVATE "${webrtc_root}/../third_party/testing/gtest/include"
-		PRIVATE "${webrtc_root}/../third_party/testing/gmock/include"
+		PRIVATE "${webrtc_root}/third_party/testing/gtest/include"
+		PRIVATE "${webrtc_root}/third_party/testing/gmock/include"
 		PRIVATE  "../codecs/ilbc/interface"
 		PRIVATE  "../codecs/pcm16b/include"
 		PRIVATE "../codecs/g722/include"
@@ -112,9 +112,9 @@ if (${include_tests})
 	if(MSVC)
 		target_compile_options(NetEqTestTools PRIVATE "/wd4267")
 		target_compile_definitions(NetEqTestTools PRIVATE "NOMINMAX")
-		target_include_directories(NetEqTestTools PRIVATE "${webrtc_root}/../third_party/gflags/src/windows")
+		target_include_directories(NetEqTestTools PRIVATE "${webrtc_root}/third_party/gflags/src/windows")
 	else()
-		target_include_directories(NetEqTestTools PRIVATE "${webrtc_root}/../third_party/gflags/src")
+		target_include_directories(NetEqTestTools PRIVATE "${webrtc_root}/third_party/gflags/src")
 	endif()
 	# These macros exist so flags and symbols are properly
 	# exported when building DLLs. Since we don't build DLLs, we
@@ -136,13 +136,13 @@ if (${include_tests})
 	target_link_libraries(neteq_unittests iSAC)
 	target_link_libraries(neteq_unittests CNG)
 	target_include_directories(neteq_unittests
-		PRIVATE "${webrtc_root}/../third_party/testing/gtest/include"
-		PRIVATE "${webrtc_root}/../third_party/testing/gmock/include")
+		PRIVATE "${webrtc_root}/third_party/testing/gtest/include"
+		PRIVATE "${webrtc_root}/third_party/testing/gmock/include")
 	if (MSVC)
 		target_compile_definitions(neteq_unittests PRIVATE "NOMINMAX")
-		target_include_directories(neteq_unittests PRIVATE "${webrtc_root}/../third_party/gflags/src/windows")
+		target_include_directories(neteq_unittests PRIVATE "${webrtc_root}/third_party/gflags/src/windows")
 	else()
-		target_include_directories(neteq_unittests PRIVATE "${webrtc_root}/../third_party/gflags/src")
+		target_include_directories(neteq_unittests PRIVATE "${webrtc_root}/third_party/gflags/src")
 	endif()
 	# These macros exist so flags and symbols are properly
 	# exported when building DLLs. Since we don't build DLLs, we
@@ -195,12 +195,12 @@ if (${include_tests})
 	target_link_libraries(neteq3_speed_test gtest)
 	target_link_libraries(neteq3_speed_test test_support_main)
 	target_include_directories(neteq3_speed_test
-		PRIVATE "${webrtc_root}/../third_party/testing/gtest/include"
-		PRIVATE "${webrtc_root}/../third_party/testing/gmock/include")
+		PRIVATE "${webrtc_root}/third_party/testing/gtest/include"
+		PRIVATE "${webrtc_root}/third_party/testing/gmock/include")
 	if (MSVC)
-		target_include_directories(neteq3_speed_test PRIVATE "${webrtc_root}/../third_party/gflags/src/windows")
+		target_include_directories(neteq3_speed_test PRIVATE "${webrtc_root}/third_party/gflags/src/windows")
 	else()
-		target_include_directories(neteq3_speed_test PRIVATE "${webrtc_root}/../third_party/gflags/src")
+		target_include_directories(neteq3_speed_test PRIVATE "${webrtc_root}/third_party/gflags/src")
 	endif()
 	# These macros exist so flags and symbols are properly
 	# exported when building DLLs. Since we don't build DLLs, we

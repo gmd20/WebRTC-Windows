@@ -1,27 +1,52 @@
 cmake_minimum_required(VERSION 2.8)
 
+# 通用配置选项，和通用的全局函数
 include(build-windows/common.cmake)
 
 project(webrtc)
 
-set (webrtc_root ${CMAKE_SOURCE_DIR})
+get_filename_component(webrtc_root ${CMAKE_SOURCE_DIR} DIRECTORY)
 message (STATUS "webrtc_root = ${webrtc_root}")
-include_directories("${webrtc_root}/..")
+include_directories("${webrtc_root}")
+include_directories("${webrtc_root}")
 
-# 所有的lib和exe统一使用static linking
+
 if (MSVC)
+	# 所有的lib和exe统一使用static linking
 	add_compile_options("/MT")
+
+	add_definitions(-DWEBRTC_WIN -DNOMINMAX)
+	# TODO(andrew): enable all warnings when possible.
+	# TODO(phoglund): get rid of 4373 supression when
+	# http://code.google.com/p/webrtc/issues/detail?id=261 is solved.
+	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /wd4373  /wd4389")
+	set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} /wd4373  /wd4389")
+elseif (UNIX)
+	add_definitions(-DWEBRTC_LINUX)
 endif()
+
+if (${enable_protobuf})
+	set(PROTOBUF_SRC_ROOT_FOLDER "${webrtc_root}/third_party/protobuf-2.5.0")
+	#include(FindProtobuf)
+	find_package(Protobuf REQUIRED)
+	if (!${PROTOBUF_FOUND})
+		message (STATUS "找不到protobuf，自己下载源码编译，并修改commoo.cmake文件里面 set\(PROTOBUF_SRC_ROOT_FOLDER 为相应源码目录。")
+	endif()
+	message (STATUS "PROTOBUF_INCLUDE_DIRS = ${PROTOBUF_INCLUDE_DIRS}")
+	message (STATUS "PROTOBUF_LIBRARIES  = ${PROTOBUF_LIBRARIES}")
+endif()
+
+
 
 add_subdirectory(system_wrappers)
 add_subdirectory(common_audio)
 add_subdirectory(common_video)
 
 if (${include_tests})
-	add_subdirectory("${webrtc_root}/../third_party/gflags" gflags)
+	add_subdirectory("${webrtc_root}/third_party/gflags" gflags)
 	# gmock include add_subdirectory(gtest)
 	# add_subdirectory("${webrtc_root}/../third_party/testing/gtest" gtest)
-	add_subdirectory("${webrtc_root}/../third_party/testing/gmock" gmock)
+	add_subdirectory("${webrtc_root}/third_party/testing/gmock" gmock)
 	add_subdirectory(test)
 endif()
 

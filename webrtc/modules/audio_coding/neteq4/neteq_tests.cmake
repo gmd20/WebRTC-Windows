@@ -6,10 +6,10 @@ target_link_libraries(neteq_rtpplay NetEq4TestTools)
 target_link_libraries(neteq_rtpplay test_support_main)
 target_link_libraries(neteq_rtpplay gflags)
 if(MSVC)
-	target_include_directories(neteq_rtpplay PRIVATE "${webrtc_root}/../third_party/gflags/src/windows")
-	target_include_directories(neteq_rtpplay PRIVATE "${webrtc_root}/../third_party/gflags/src")
+	target_include_directories(neteq_rtpplay PRIVATE "${webrtc_root}/third_party/gflags/src/windows")
+	target_include_directories(neteq_rtpplay PRIVATE "${webrtc_root}/third_party/gflags/src")
 else()
-	target_include_directories(neteq_rtpplay PRIVATE "${webrtc_root}/../third_party/gflags/src")
+	target_include_directories(neteq_rtpplay PRIVATE "${webrtc_root}/third_party/gflags/src")
 endif()
 # These macros exist so flags and symbols are properly
 # exported when building DLLs. Since we don't build DLLs, we
@@ -50,10 +50,10 @@ target_compile_definitions(RTPencode
 target_include_directories(RTPencode
 	PRIVATE "interface"
 	PRIVATE "test"
-	PRIVATE "${webrtc_root}"
-	PRIVATE "${webrtc_root}/../third_party/testing/gtest/include"
-	PRIVATE "${webrtc_root}/../third_party/testing/gmock/include"
-	PRIVATE "${webrtc_root}/common_audio/vad/include"
+	PRIVATE "${webrtc_root}/webrtc"
+	PRIVATE "${webrtc_root}/third_party/testing/gtest/include"
+	PRIVATE "${webrtc_root}/third_party/testing/gmock/include"
+	PRIVATE "${webrtc_root}/webrtc/common_audio/vad/include"
 	PRIVATE "../codecs/isac/main/interface"
 	PRIVATE "../codecs/ilbc/interface"
 	PRIVATE "../codecs/pcm16b/include"
@@ -67,7 +67,7 @@ add_executable(RTPjitter  ${RTPjitter_source})
 target_link_libraries(RTPjitter gtest)
 target_link_libraries(RTPjitter Ws2_32.lib)
 target_include_directories(RTPjitter
-	PRIVATE "${webrtc_root}/../third_party/testing/gtest/include")
+	PRIVATE "${webrtc_root}/third_party/testing/gtest/include")
 
 set (RTPanalyze_source
 	"test/RTPanalyze.cc")
@@ -89,7 +89,7 @@ add_executable(RTPtimeshift  ${RTPtimeshift_source})
 target_link_libraries(RTPtimeshift NetEq4TestTools)
 target_link_libraries(RTPtimeshift gtest)
 target_include_directories(RTPtimeshift
-	PRIVATE "${webrtc_root}/../third_party/testing/gtest/include")
+	PRIVATE "${webrtc_root}/third_party/testing/gtest/include")
 
 
 set (RTPcat_source
@@ -98,7 +98,7 @@ add_executable(RTPcat  ${RTPcat_source})
 target_link_libraries(RTPcat NetEq4TestTools)
 target_link_libraries(RTPcat gtest)
 target_include_directories(RTPcat
-	PRIVATE "${webrtc_root}/../third_party/testing/gtest/include")
+	PRIVATE "${webrtc_root}/third_party/testing/gtest/include")
 
 
 set (rtp_to_text_source
@@ -107,7 +107,7 @@ add_executable(rtp_to_text  ${rtp_to_text_source})
 target_link_libraries(rtp_to_text NetEq4TestTools)
 target_link_libraries(rtp_to_text system_wrappers)
 target_include_directories(rtp_to_text
-	PRIVATE "${webrtc_root}/system_wrappers/interface")
+	PRIVATE "${webrtc_root}/webrtc/system_wrappers/interface")
 
 
 set (neteq4_speed_test_source
@@ -119,10 +119,10 @@ target_link_libraries(neteq4_speed_test PCM16B)
 target_link_libraries(neteq4_speed_test gflags)
 target_link_libraries(neteq4_speed_test test_support_main)
 if(MSVC)
-	target_include_directories(neteq4_speed_test PRIVATE "${webrtc_root}/../third_party/gflags/src/windows")
-	target_include_directories(neteq4_speed_test PRIVATE "${webrtc_root}/../third_party/gflags/src")
+	target_include_directories(neteq4_speed_test PRIVATE "${webrtc_root}/third_party/gflags/src/windows")
+	target_include_directories(neteq4_speed_test PRIVATE "${webrtc_root}/third_party/gflags/src")
 else()
-	target_include_directories(neteq4_speed_test PRIVATE "${webrtc_root}/../third_party/gflags/src")
+	target_include_directories(neteq4_speed_test PRIVATE "${webrtc_root}/third_party/gflags/src")
 endif()
 # These macros exist so flags and symbols are properly
 # exported when building DLLs. Since we don't build DLLs, we
@@ -150,7 +150,7 @@ target_link_libraries(NetEq4TestTools Ws2_32.lib)
 target_include_directories(NetEq4TestTools
 	PRIVATE "interface"
 	PRIVATE "test"
-	PRIVATE "${webrtc_root}"
-	PRIVATE "${webrtc_root}/../third_party/testing/gtest/include"
-	PRIVATE "${webrtc_root}/../third_party/testing/gmock/include")
+	PRIVATE "${webrtc_root}/webrtc"
+	PRIVATE "${webrtc_root}/third_party/testing/gtest/include"
+	PRIVATE "${webrtc_root}/third_party/testing/gmock/include")
 target_compile_options(NetEq4TestTools PRIVATE "/wd4267")

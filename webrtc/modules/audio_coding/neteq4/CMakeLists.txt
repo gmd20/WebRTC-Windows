@@ -1,7 +1,7 @@
 include_directories("interface"
-	"${webrtc_root}"
-	"${webrtc_root}/common_audio/signal_processing/include"
-	"../codecs/cng/include")
+					"${webrtc_root}/webrtc"
+					"${webrtc_root}/webrtc/common_audio/signal_processing/include"
+					"../codecs/cng/include")
 
 
 set (NetEq4_source
@@ -123,16 +123,16 @@ if (${include_tests})
 		PRIVATE "interface"
 		PRIVATE "test"
 		PRIVATE "../codecs/isac/main/interface"
-		PRIVATE "${webrtc_root}/../third_party/testing/gtest/include"
-		PRIVATE "${webrtc_root}/../third_party/testing/gmock/include"
+		PRIVATE "${webrtc_root}/third_party/testing/gtest/include"
+		PRIVATE "${webrtc_root}/third_party/testing/gmock/include"
 		PRIVATE  "../codecs/ilbc/interface"
 		PRIVATE  "../codecs/pcm16b/include"
 		PRIVATE "../codecs/g722/include"
 		PRIVATE "../codecs/g711/include")
 	if(MSVC)
-		target_include_directories(audio_decoder_unittests PRIVATE "${webrtc_root}/../third_party/gflags/src/windows")
+		target_include_directories(audio_decoder_unittests PRIVATE "${webrtc_root}/third_party/gflags/src/windows")
 	else()
-		target_include_directories(audio_decoder_unittests PRIVATE "${webrtc_root}/../third_party/gflags/src")
+		target_include_directories(audio_decoder_unittests PRIVATE "${webrtc_root}/third_party/gflags/src")
 	endif()
 
 
@@ -152,6 +152,6 @@ if (${include_tests})
 	target_link_libraries(neteq_unittest_tools gmock)
 	target_include_directories(neteq_unittest_tools
 		PRIVATE "tools"
-		PRIVATE "${webrtc_root}/../third_party/testing/gtest/include"
-		PRIVATE "${webrtc_root}/../third_party/testing/gmock/include")
+		PRIVATE "${webrtc_root}/third_party/testing/gtest/include"
+		PRIVATE "${webrtc_root}/third_party/testing/gmock/include")
 endif()
