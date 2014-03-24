@@ -15,6 +15,9 @@ if (MSVC)
 	# 所有的lib和exe统一使用static linking
 	add_compile_options("/MT")
 
+	#使用Unicode项目
+	add_definitions(-D_UNICODE)
+
 	add_definitions(-DWEBRTC_WIN -DNOMINMAX)
 	# TODO(andrew): enable all warnings when possible.
 	# TODO(phoglund): get rid of 4373 supression when
@@ -23,6 +26,10 @@ if (MSVC)
 	set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} /wd4373  /wd4389")
 elseif (UNIX)
 	add_definitions(-DWEBRTC_LINUX)
+endif()
+
+if(${enable_video})
+	add_definitions(-DWEBRTC_MODULE_UTILITY_VIDEO)
 endif()
 
 if (${enable_protobuf})
@@ -35,7 +42,6 @@ if (${enable_protobuf})
 	message (STATUS "PROTOBUF_INCLUDE_DIRS = ${PROTOBUF_INCLUDE_DIRS}")
 	message (STATUS "PROTOBUF_LIBRARIES  = ${PROTOBUF_LIBRARIES}")
 endif()
-
 
 
 add_subdirectory(system_wrappers)

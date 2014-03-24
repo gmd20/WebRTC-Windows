@@ -36,7 +36,11 @@ set (libyuv_dir "../..//third_party/libyuv")
 set (include_tests 1)
 set (include_opus 1)
 
-
+set (include_pulse_audio 1)
+set (include_internal_audio_device 1)
+set (include_internal_video_capture 1)
+set (include_internal_video_render 1)
+set (include_internal_audio_device 1)
 
 
 
