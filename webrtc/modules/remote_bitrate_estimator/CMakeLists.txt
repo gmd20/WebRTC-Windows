@@ -12,7 +12,6 @@ add_library(rbe_components STATIC ${rbe_components_source})
 
 
 
-#remote_bitrate_estimator_components
 set (remote_bitrate_estimator_source
         "include/bwe_defines.h"
         "include/remote_bitrate_estimator.h"
