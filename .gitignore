@@ -110,3 +110,4 @@
 !/third_party/libyuv
 /third_party/protobuf-2.5.0/vsprojects/Release
 /third_party/protobuf-2.5.0/gtest/msvc/protobuf
+!/third_party/libvpx

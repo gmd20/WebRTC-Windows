@@ -1,0 +1,60 @@
+# ../libvpx-v1.3.0/configure --target=x86-win32-vs12 --enable-static-msvcrt
+Configuring selected codecs
+  enabling vp8_encoder
+  enabling vp8_decoder
+  enabling vp9_encoder
+  enabling vp9_decoder
+Configuring for target 'x86-win32-vs12'
+  enabling x86
+check_cpp
+BEGIN /tmp/vpx-conf-6580-20000.c
+END /tmp/vpx-conf-6580-20000.c
+-o /tmp/vpx-conf-6580-20000.o /tmp/vpx-conf-6580-20000.c
+../libvpx-v1.3.0/build/make/configure.sh: line 285: -E: command not found
+  enabling runtime_cpu_detect
+  enabling mmx
+  enabling sse
+  enabling sse2
+  enabling sse3
+  enabling ssse3
+  enabling sse4_1
+  enabling avx
+  enabling avx2
+  using msvs
+check_cxxflags -O3
+check_cxx -O3
+BEGIN /tmp/vpx-conf-6580-20000.cc
+END /tmp/vpx-conf-6580-20000.cc
+-O3 -c -o /tmp/vpx-conf-6580-20000.o /tmp/vpx-conf-6580-20000.cc
+../libvpx-v1.3.0/build/make/configure.sh: line 285: -O3: command not found
+check_cflags -O3
+check_cc -O3
+BEGIN /tmp/vpx-conf-6580-20000.c
+END /tmp/vpx-conf-6580-20000.c
+-O3 -c -o /tmp/vpx-conf-6580-20000.o /tmp/vpx-conf-6580-20000.c
+../libvpx-v1.3.0/build/make/configure.sh: line 285: -O3: command not found
+  enabling use_x86inc
+check_cc
+BEGIN /tmp/vpx-conf-6580-20000.c
+END /tmp/vpx-conf-6580-20000.c
+-c -o /tmp/vpx-conf-6580-20000.o /tmp/vpx-conf-6580-20000.c
+../libvpx-v1.3.0/build/make/configure.sh: line 285: -c: command not found
+check_cc
+BEGIN /tmp/vpx-conf-6580-20000.c
+END /tmp/vpx-conf-6580-20000.c
+-c -o /tmp/vpx-conf-6580-20000.o /tmp/vpx-conf-6580-20000.c
+../libvpx-v1.3.0/build/make/configure.sh: line 285: -c: command not found
+check_cc
+BEGIN /tmp/vpx-conf-6580-20000.c
+END /tmp/vpx-conf-6580-20000.c
+-c -o /tmp/vpx-conf-6580-20000.o /tmp/vpx-conf-6580-20000.c
+../libvpx-v1.3.0/build/make/configure.sh: line 285: -c: command not found
+  disabling ccache
+  enabling postproc
+  enabling unit_tests
+fake_check_header stdio.h
+fake_check_header stdint.h
+fake_check_header pthread.h
+fake_check_header sys/mman.h
+fake_check_header unistd.h
+fake_check_header vpx/vpx_integer.h -I../libvpx-v1.3.0
