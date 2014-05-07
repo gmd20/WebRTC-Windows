@@ -23,6 +23,6 @@ add_dependencies(common_video system_wrappers)
 
 if (${build_libyuv})
 	add_subdirectory("${libyuv_dir}" "libyuv")
-	include_directories( "${libyuv_dir}/include")
-	add_dependencies(common_video libyuv)
+	target_include_directories(common_video PRIVATE "${libyuv_dir}/include")
+	target_link_libraries(common_video libyuv)
 endif()
