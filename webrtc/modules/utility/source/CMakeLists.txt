@@ -22,7 +22,7 @@ set (webrtc_utility_source
         "rtp_dump_impl.h")
 
 if (${enable_video})
-	list(APPEND awebrtc_utility_source
+	list(APPEND webrtc_utility_source
 		"frame_scaler.cc"
 		"video_coder.cc"
 		"video_frames_queue.cc")
