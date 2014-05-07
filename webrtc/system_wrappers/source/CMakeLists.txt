@@ -94,7 +94,6 @@ extract_platform_specific_source(systerm_wrappers_sources)
 #message(STATUS "systerm_wrappers_sources =${systerm_wrappers_sources}")
 
 add_library(system_wrappers STATIC ${systerm_wrappers_sources})
-
 if(MSVC)
 	target_link_libraries(system_wrappers winmm.lib)
 elseif(UNIX)
@@ -102,4 +101,7 @@ elseif(UNIX)
 	target_link_libraries(system_wrappers rt)
 endif()
 
-
+# 为所有依赖这个库的添加头文件包含目录
+target_include_directories(system_wrappers
+				PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+				PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../interface)
