@@ -27,7 +27,7 @@ if (${enable_video})
 		"video_coder.cc"
 		"video_frames_queue.cc")
 endif()
-add_library(webrtc_utility STATIC ${awebrtc_utility_source})
+add_library(webrtc_utility STATIC ${webrtc_utility_source})
 target_link_libraries(webrtc_utility audio_coding_module)
 target_link_libraries(webrtc_utility media_file)
 target_link_libraries(webrtc_utility common_audio)
