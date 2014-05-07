@@ -47,6 +47,13 @@ add_library(frame_generator STATIC
 target_link_libraries(frame_generator common_video)
 
 
+add_library(metrics STATIC
+			"testsupport/metrics/video_metrics.h"
+			"testsupport/metrics/video_metrics.cc")
+target_link_libraries(metrics common_video)
+target_link_libraries(metrics system_wrappers)
+
+
 set (test_support_source
 	"test_suite.cc"
 	"test_suite.h"
@@ -80,6 +87,12 @@ target_compile_definitions(test_support
 	PRIVATE "GFLAGS_DLL_DECL="
 	PRIVATE "GFLAGS_DLL_DECLARE_FLAG="
 	PRIVATE "GFLAGS_DLL_DEFINE_FLAG=")
+# 为所有依赖这个库的项目添加包含头文件
+target_include_directories(test_support
+	PUBLIC "${webrtc_root}/third_party"
+	PUBLIC "${webrtc_root}/third_party/testing"
+	PUBLIC "${webrtc_root}/third_party/testing/gmock/include"
+	PUBLIC "${webrtc_root}/third_party/testing/gtest/include")
 
 
 add_library(test_support_main STATIC "run_all_unittests.cc")

@@ -54,6 +54,7 @@ if (${include_tests})
 	# add_subdirectory("${webrtc_root}/../third_party/testing/gtest" gtest)
 	add_subdirectory("${webrtc_root}/third_party/testing/gmock" gmock)
 	add_subdirectory(test)
+	add_subdirectory(tools)
 endif()
 
 add_subdirectory(modules)
