@@ -1,6 +1,9 @@
 include_directories("${webrtc_root}/")
 
 set (baseclasses_dir "src/v7.1/Samples/multimedia/directshow/baseclasses")
+if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${baseclasses_dir}")
+	message(FATAL_ERROR "The winsdk 7.1 samples baseclasses_dir(${CMAKE_CURRENT_SOURCE_DIR}/${baseclasses_dir}) doesn't exist.")
+endif()
 
 set (directshow_baseclasses_source
         "${baseclasses_dir}/amextra.cpp"
