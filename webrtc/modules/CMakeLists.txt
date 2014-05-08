@@ -25,7 +25,7 @@ add_subdirectory("video_coding/utility")
 add_subdirectory("video_coding/main/source")
 add_subdirectory("video_capture")
 add_subdirectory("video_processing/main/source")
-#add_subdirectory("video_render")
+add_subdirectory("video_render")
 
 
 if (${include_tests})
