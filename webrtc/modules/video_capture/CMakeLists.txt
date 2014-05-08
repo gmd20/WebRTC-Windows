@@ -59,7 +59,7 @@ if (${include_tests})
 	set (video_capture_tests_source
 			"test/video_capture_unittest.cc"
 			"test/video_capture_main_mac.mm")
-	add_library(video_capture_tests STATIC ${video_capture_tests_source})
+	add_executable(video_capture_tests ${video_capture_tests_source})
 	target_link_libraries(video_capture_tests video_capture_module)
 	target_link_libraries(video_capture_tests webrtc_utility)
 	target_link_libraries(video_capture_tests system_wrappers)
