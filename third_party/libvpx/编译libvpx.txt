@@ -1,0 +1,45 @@
+参考 http://www.webmproject.org/code/build-prerequisites/
+
+安装msys或者像我这样在msys git的基础上安装msys make
+========================================
+我用的Visual Studio 2013来编译，target在configure里面查找的到，分别对应不同的
+平台，32/64bit 不同的vistual stuido版本
+推荐用msys的终端做如下操作，我是直接在git的终端里面做的。因为机器按照有msys
+git。已经有待msys了，但缺少了一个make，
+
+1.
+需要到MINGW下载对应的msys make程序二进制包，
+http://sourceforge.net/projects/mingw/files/MSYS/Base/make/make-3.81-3/
+把它放到git的bin目录下就可以了。
+注意不要下载MINGW-make，那个兼容性没有这个msys make的好。
+用 mingw make编译的话 ，生成vpx.project 目标时sh崩溃了，好像是展开make的自动化变量 $^ 展开时有问题。
+
+2.
+同时由于make依赖msys-libintl-8.dll这个gettext的运行时库。所以也要下载
+http://sourceforge.net/projects/mingw/files/MSYS/Base/gettext/gettext-0.18.1.1-1/libintl-0.18.1.1-1-msys-1.0.17-dll-8.tar.lzma
+把msys-libintl-8.dll也解压出来放到 /bin目录
+
+3.
+libintl 又依赖于libiconv， 也把这个dll下载回来放到/bin目录
+http://sourceforge.net/projects/mingw/files/MSYS/Base/libiconv/libiconv-1.14-1/libiconv-1.14-1-msys-1.0.17-dll-2.tar.lzma
+
+
+配置生成vc的工程文件
+=====================
+在msys git的命令终端切换到一个和libvpx源码不同目录的build目录下面做一下操作
+../libvpx/configure --target=x86-win32-vs12 --enable-static-msvcrt
+make
+
+make完成会会生成所有vc 工程文件， 只要在vc 2013中打开生成的 vpx.sln 文件就可以了
+
+
+安装yasm汇编器
+==============
+下载需要yasm.exe，放到可以找的到系统目录去就可以编译了。
+http://yasm.tortall.net/Download.html
+Win32 .exe (for general use on 32-bit Windows)
+Win64 .exe (for general use on 64-bit Windows)
+
+我用通用32位的，放到 build目录，改名为yasm.exe， visual
+stuido就可以找的到了。编译就可以通过了。
+
