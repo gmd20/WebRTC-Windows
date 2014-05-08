@@ -67,6 +67,6 @@ set (directshow_baseclasses_source
 
 
 add_library(directshow_baseclasses STATIC ${directshow_baseclasses_source})
-target_include_directories(directshow_baseclasses PRIVATE "NOMINMAX")
-target_compile_definitions(directshow_baseclasses PRIVATE "${baseclasses_dir}")
+target_compile_options(directshow_baseclasses PRIVATE "/U NOMINMAX")
+target_include_directories(directshow_baseclasses PUBLIC "${baseclasses_dir}")
 
