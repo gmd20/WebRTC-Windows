@@ -6,6 +6,10 @@
 # 这里简单手工指定吧
 set (target_arch "x64")
 
+# 添加自定义系统平台变量定义
+# "android" "ios" "linux" "mac" "win"
+set (OS "win")
+
 set (build_with_libjingle 0)
 set (webrtc_root "")
 set (webrtc_vp8_dir "")
@@ -31,7 +35,6 @@ set (build_libyuv 1)
 set (build_libvpx  1)
 set (libyuv_dir "../..//third_party/libyuv")
 
-
 # 是否包含单元测试程序项目
 set (include_tests 1)
 set (include_opus 1)
@@ -42,12 +45,9 @@ set (include_internal_video_capture 1)
 set (include_internal_video_render 1)
 set (include_internal_audio_device 1)
 
-
-
 ###################################################
 #  list functions from  curl/CMake/Utilities.cmake
 ###################################################
-
 
 # File containing various utilities
 
@@ -80,9 +80,6 @@ function(IN_STR_LIST LIST_NAME ITEM_SEARCHED RETVAL)
     set(${RETVAL} TRUE PARENT_SCOPE)
   endif()
 endfunction()
-
-
-
 
 #################################################
 # functions to extract platform specific source #
@@ -129,3 +126,25 @@ function (exclude_regex_matched_source regex source_list)
 	endforeach()
 	set(${source_list} ${new_source_list} PARENT_SCOPE)
 endfunction()
+
+
+#=========================================================
+# Append str to a string property of a target.
+# target:      string: target name.
+# property:            name of target’s property. e.g: COMPILE_FLAGS, or LINK_FLAGS
+# str:         string: string to be appended to the property
+macro(my_append_target_property target property str)
+	get_target_property(current_property ${target} ${property})
+	if(NOT current_property) # property non-existent or empty
+		set_target_properties(${target} PROPERTIES ${property} ${str})
+	else()
+		set_target_properties(${target} PROPERTIES ${property} "${current_property} ${str}")
+	endif()
+endmacro(my_append_target_property)
+
+# Add/append link flags to a target.
+# target: string: target name.
+# flags : string: link flags to be appended
+macro(target_link_options target flags)
+	my_append_target_property(${target} LINK_FLAGS ${flags})
+endmacro(target_link_options)
