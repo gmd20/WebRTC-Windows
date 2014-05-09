@@ -1,6 +1,6 @@
 set (webrtc_video_dependencies "video_engine_core")
 
-set (voice_engine_source
+set (webrtc_video_sources
       "video/call.cc"
       "video/encoded_frame_callback_adapter.cc"
       "video/encoded_frame_callback_adapter.h"
