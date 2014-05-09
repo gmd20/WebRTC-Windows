@@ -117,3 +117,5 @@ target_link_libraries(test_support_unittests test_support_main)
 if (MSVC)
 	target_compile_options(test_support_unittests PRIVATE "/wd4267")
 endif()
+
+add_subdirectory(libtest)
