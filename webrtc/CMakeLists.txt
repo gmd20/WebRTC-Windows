@@ -58,9 +58,9 @@ if (${include_tests})
 endif()
 
 add_subdirectory(modules)
-#add_subdirectory(video)
+add_subdirectory(voice_engine)
 #add_subdirectory(video_engine)
-#add_subdirectory(voice_engine)
+#add_subdirectory(video)
 #add_subdirectory(${webrtc_vp8_dir})
 
 
