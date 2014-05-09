@@ -64,36 +64,35 @@ include(video/webrtc_video.cmake)
 #add_subdirectory(${webrtc_vp8_dir})
 
 
+set (webrtc_source
+        "call.h"
+        "config.h"
+        "experiments.h"
+        "frame_callback.h"
+        "transport.h"
+        "video_receive_stream.h"
+        "video_renderer.h"
+        "video_send_stream.h")
+# TODO(pbos): This is intended to contain audio parts as well as soon as
+#             VoiceEngine moves to the same new API format.
+list(APPEND webrtc_source "${webrtc_video_sources}")
+add_library(webrtc STATIC ${webrtc_source})
+target_link_libraries(webrtc ${webrtc_video_dependencies})
 
-
-# set (webrtc_source
-#         "call.h"
-#         "config.h"
-#         "experiments.h"
-#         "frame_callback.h"
-#         "transport.h"
-#         "video_receive_stream.h"
-#         "video_renderer.h"
-#         "video_send_stream.h")
-# # TODO(pbos): This is intended to contain audio parts as well as soon as
-# #             VoiceEngine moves to the same new API format.
-# list(APPEND webrtc_source "${webrtc_video_sources}")
-# add_library(webtrc STATIC ${webrtc_source})
-# target_link_libraries(webrtc ${webrtc_video_dependencies})
-
-# add_custom_target(webrtc_all)
-# add_dependencies(webrtc_all common_audio)
-# add_dependencies(webrtc_all common_video)
-# add_dependencies(webrtc_all modules)
-# add_dependencies(webrtc_all system_wrappers)
-# add_dependencies(webrtc_all video_engine)
-# add_dependencies(webrtc_all voice_engine)
-# add_dependencies(webrtc_all vp8)
-# add_dependencies(webrtc_all webtrc)
-# if (${include_tests})
-# 	add_dependencies(webrtc_all common_video_unittests)
-# 	add_dependencies(webrtc_all system_wrappers_tests)
-# 	add_dependencies(webrtc_all webrtc_test_common_unittests)
-# 	add_dependencies(webrtc_all tools)
-# 	add_dependencies(webrtc_all webrtc_tests)
-# endif()
+add_custom_target(webrtc_all)
+add_dependencies(webrtc_all common_audio
+							common_video
+							modules
+							system_wrappers
+							video_engine
+							voice_engine
+							vp8
+							webrtc)
+if (${include_tests})
+	include(webrtc_tests.cmake)
+	add_dependencies(webrtc_all common_video_unittests
+								system_wrappers_tests
+								webrtc_test_common_unittests
+								tools
+								webrtc_tests)
+endif()

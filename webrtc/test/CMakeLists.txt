@@ -119,3 +119,4 @@ if (MSVC)
 endif()
 
 add_subdirectory(libtest)
+include(webrtc_test_common.cmake)
