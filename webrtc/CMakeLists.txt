@@ -59,8 +59,8 @@ endif()
 
 add_subdirectory(modules)
 add_subdirectory(voice_engine)
-#add_subdirectory(video_engine)
-#add_subdirectory(video)
+add_subdirectory(video_engine)
+include(video/webrtc_video.cmake)
 #add_subdirectory(${webrtc_vp8_dir})
 
 
