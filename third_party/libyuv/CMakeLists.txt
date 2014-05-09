@@ -1,5 +1,3 @@
-include_directories("include")
-
 set (libyuv_source
       # includes.
       "include/libyuv.h"
@@ -58,4 +56,4 @@ set (libyuv_source
 
 extract_platform_specific_source(libyuv_source)
 add_library(libyuv STATIC ${libyuv_source})
-
+target_include_directories(libyuv PUBLIC "include")
